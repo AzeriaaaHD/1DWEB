@@ -1,0 +1,261 @@
+<!doctype html> 
+
+<html>
+<head>
+    <title>Labyrinthe</title>
+    <script language="JavaScript">
+        m='m'; //représente un mur
+        p='p'; //représente le personnage
+        b='b'; //représente le chemin
+        f="f"; //représente le trophée 
+
+        xperso=1; //position initial du personnage sur l'axe X
+        yperso=1; //postition initial du personnage sur l'axe Y
+        //tableau à double entrée représentant votre labyrinthe, vous pouvez le modifier pour comprendre le fonctionnement
+        var laby = [[m,p,m,m,m,m,m,m,m,m],
+                    [m,b,m,b,b,b,b,b,b,m],
+                    [m,b,m,b,m,b,m,m,b,m],
+                    [m,b,m,b,m,b,m,m,b,m],
+                    [m,b,b,b,m,b,m,m,b,m],
+                    [m,m,m,m,m,b,b,m,b,f],
+                    [m,m,m,m,m,m,m,m,m,m]];
+                    
+     
+                  
+      
+         
+        function afficheLaby() //ne rien modifier dans cette fonction
+        {
+            var leLaby=document.getElementById("laby");
+            insertion="<table border=0 cellspacing=0 cellpadding=0>";
+         
+         
+            for(i=0;i<7;i++)
+            {
+            insertion+="<tr>";
+                for(j=0;j<10;j++)
+                {
+                 
+                    if (laby[i][j]==m)
+                    {
+                    insertion+="<td>";
+                    insertion+="<img width='52'height='52' src='Assets/stonewall.png'>";
+                    insertion+="</td>";
+                    }
+                    if (laby[i][j]==p)
+                    {
+                    insertion+="<td>";
+                    insertion+="<img   id='box' width='52' height='52' style='background-image:Assets/Ground.png' src='Assets/Heros.png'>";
+                    insertion+="</td>";
+                    }
+                    if (laby[i][j]==b)
+                    {
+                    insertion+="<td>";
+                    insertion+="<img width='52' height='52' src='Assets/Ground.png'>";
+                    insertion+="</td>";
+                    }
+
+                    if (laby[i][j]==f)
+                    {
+                    insertion+="<td>";
+                    insertion+="<img width='52' height='52'src='Assets/Trophy.png'>";
+                    insertion+="</td>";
+                    }
+                     
+             
+                     
+                }
+                insertion+="</tr>";
+            }  
+             
+            insertion+="</table>";
+            leLaby.innerHTML=insertion;
+        }
+
+        function droite(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i][j+1]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i][j+1]==b)
+                            {
+                                //nbpas++
+                                laby[i][j+1]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j+1]==f)
+                            {
+                                //nbpas++
+                                laby[i][j+1]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function bas(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i+1][j]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i+1][j]==b)
+                            {
+                                //nbpas++
+                                laby[i+1][j]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i+1][j]==f)
+                            {
+                                //nbpas++
+                                laby[i+1][j]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function haut(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i-1][j]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i-1][j]==b)
+                            {
+                                //nbpas++
+                                laby[i-1][j]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j]==f)
+                            {
+                                //nbpas++
+                                laby[i-1][j]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function gauche(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i][j-1]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i][j-1]==b)
+                            {
+                                //nbpas++
+                                laby[i][j-1]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j-1]==f)
+                            {
+                                //nbpas++
+                                laby[i][j-1]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                            }    
+
+                        }
+                    }
+            }   }
+        
+        
+    </script>
+</head>   
+    <body>
+        <div id="laby">
+ 
+        </div>
+
+    <input type="button" value="GO" onclick="afficheLaby();"><br/>
+
+    <!-- ajouter vos boutons de déplacement ici -->
+
+    <input type="button" value="HAUT" onclick="haut();" id="h"/> 
+    <input type="button" value="GAUCHE" onclick="gauche();" id="g"/>
+    <input type="button" value="DROITE" onclick="droite();" id="d"/>
+    <input type="button" value="BAS" onclick="bas();"  id="b" />
+
+ <style type="text/css">
+ #g {
+     position: relative;
+     top: 60px;
+     left: -40px;
+   }
+
+</style>
+
+<style type="text/css">
+#d{
+    position: relative;
+    top: 60px;
+    left: 30px
+}
+</style>
+
+<style type="text/css">
+    #h{
+        position: relative;
+        top: 25px;
+        left: 100px;
+    }
+</style>
+<style type="text/css">
+#b{
+    position: relative;
+    top: 85px;
+    left: -100px;
+}
+
+</style>
+</body>
+</html>
