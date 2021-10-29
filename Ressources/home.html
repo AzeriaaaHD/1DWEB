@@ -19,9 +19,11 @@
                     [m,b,b,b,m,b,m,m,b,m],
                     [m,m,m,m,m,b,b,m,b,f],
                     [m,m,m,m,m,m,m,m,m,m]];
+                    
      
                   
       
+         var nbpas = 0
          
         function afficheLaby() //ne rien modifier dans cette fonction
         {
@@ -44,7 +46,7 @@
                     if (laby[i][j]==p)
                     {
                     insertion+="<td>";
-                    insertion+="<img width='52' height='52' style='background-image:Assets/Ground.png' src='Assets/Heros.png'>";
+                    insertion+="<img   id='box' width='52' height='52' style='background-image:Assets/Ground.png' src='Assets/Heros.png'>";
                     insertion+="</td>";
                     }
                     if (laby[i][j]==b)
@@ -54,35 +56,252 @@
                     insertion+="</td>";
                     }
 
-                     
                     if (laby[i][j]==f)
                     {
                     insertion+="<td>";
                     insertion+="<img width='52' height='52'src='Assets/Trophy.png'>";
                     insertion+="</td>";
                     }
-                     
-             
-                     
-                }
+        
+        }
                 insertion+="</tr>";
             }  
              
             insertion+="</table>";
             leLaby.innerHTML=insertion;
         }
-         
+
+        function droite(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i][j+1]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i][j+1]==b)
+                            {
+                                nbpas++
+                                laby[i][j+1]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j+1]==f)
+                            {
+                                nbpas++
+                                laby[i][j+1]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                                alert('vous avez effectué '+ nbpas +' pour finir le labyrinthe' )
+                                alert('Vous avez terminé le labyrinthe en '+ temps +' secondes')
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function bas(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i+1][j]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i+1][j]==b)
+                            {
+                                nbpas++
+                                laby[i+1][j]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i+1][j]==f)
+                            {
+                                nbpas++
+                                laby[i+1][j]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                                alert('vous avez effectué '+ nbpas +' pour finir le labyrinthe' )
+                                alert('Vous avez terminé le labyrinthe en '+ temps +' secondes')
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function haut(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i-1][j]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i-1][j]==b)
+                            {
+                                nbpas++
+                                laby[i-1][j]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j]==f)
+                            {
+                                nbpas++
+                                laby[i-1][j]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                                alert('vous avez effectué '+ nbpas +' pour finir le labyrinthe' )
+                                alert('Vous avez terminé le labyrinthe en '+ temps +' secondes')
+                            }    
+
+                        }
+                    }
+            }
+        }
+        function gauche(){
+            var leLaby = document.getElementById("laby");
+            for(i=0;i<8;i++)
+            {
+                insertion+="<tr>";
+                    for(j=0;j<13;j++)
+                    {
+                        if(laby[i][j]==p)
+                        {
+                            if(laby[i][j-1]==m)
+                            {
+                                alert("vous ne pouvez pas traverser ce mur");
+
+                            }
+                            if(laby[i][j-1]==b)
+                            {
+                                nbpas++
+                                laby[i][j-1]=p;
+                                laby[i][j]=b;
+                                afficheLaby()
+                            }
+                            if(laby[i][j-1]==f)
+                            {
+                                nbpas++
+                                laby[i][j-1]=p
+                                laby[i][j]=b
+                                afficheLaby()
+                                alert("Bravo tu as gagné")
+                                alert('vous avez effectué '+ nbpas +' pas pour finir le labyrinthe' )
+                                alert('Vous avez terminé le labyrinthe en '+ temps +' secondes')
+                                
+                            }    
+
+                        }
+                    }
+            }
+        }
+        document.onkeydown = checkKey;
+        function checkKey(e) {
+            e = e || window.event;
+            if (e.keyCode == 38) {
+            haut()
+            }
+            else if (e.keyCode == 40) {
+            bas()
+            }
+            else if (e.keyCode == 37) {
+            gauche()
+            }
+            else if (e.keyCode == 39) {
+            droite()
+            }
+
+        }
+        var temps = 0
+        function diminuertemps(){
+            const timerElement = document.getElementById("timer")
+            timerElement.innerText = temps
+            temps++
+            setTimeout(diminuertemps,1000)
+        if(laby[i][j]==f){
+            clearInterval(timer)
+            
+        }  
+    }     
+       
+        
     </script>
-</head>
+</head>   
     <body>
         <div id="laby">
  
         </div>
-
-    <input type="button" value="GO" onclick="afficheLaby();"><br/><BR><BR>
+        <div id="timer"></div>
+    
+    <input type="button" value="GO" onclick="afficheLaby(); diminuertemps();"><br/>
 
     <!-- ajouter vos boutons de déplacement ici -->
 
- 
+    <input type="button" value="HAUT" onclick="haut(); " id="h"/> 
+    <input type="button" value="GAUCHE" onclick="gauche();" id="g"/>
+    <input type="button" value="DROITE" onclick="droite();" id="d"/>
+    <input type="button" value="BAS" onclick="bas();"  id="b" />
+    <input type="button" value="touches" onclick="checkKey();"id="c"/>
+
+ <style type="text/css">
+ #g {
+     position: relative;
+     top: 60px;
+     left: -40px;
+   }
+
+</style>
+
+<style type="text/css">
+#d{
+    position: relative;
+    top: 60px;
+    left: 30px
+}
+</style>
+
+<style type="text/css">
+    #h{
+        position: relative;
+        top: 25px;
+        left: 100px;
+    }
+</style>
+<style type="text/css">
+#b{
+    position: relative;
+    top: 85px;
+    left: -100px;
+}
+
+</style>
+<style type="text/css">
+#c{
+    position: relative;
+    top: 200px;
+    left: -255px;
+}
+</style>
 </body>
 </html>
